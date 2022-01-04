@@ -5,6 +5,13 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        ::placeholder {
+          color: black;
+          opacity: 0.6;
+        }
+        
+        </style>
     <title>PAKOPA Prijava</title>
 </head>
 <body>
@@ -21,8 +28,16 @@
         <form action="prijava.html">
         <input type="submit" value="Prijava">
         </form>
+    
     <p>
         Prijavite se podacima dobivenima od hotela.
-        </p>
+    </p>
+
+        <input type="text" id="korisnickoIme" name="korisnickoIme"
+        placeholder="Korisničko ime"><br>
+        <input type="password" id="zaporka" name="zaporka" placeholder="Zaporka"><br><br>
+        <form action="pocetnaStudent.html">
+        <input type="submit" value="Prijava kao student">
+        </form>
 </body>
 </html>
