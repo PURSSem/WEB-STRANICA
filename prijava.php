@@ -35,9 +35,9 @@
         Prijavite se podacima dobivenima od hotela.
     </p>
 
-        <input type="text" id="korisnickoIme" name="korisnickoIme"
+        <input type="text" name="korisnickoIme"
         placeholder="Korisničko ime"><br>
-        <input type="password" id="zaporka" name="zaporka" placeholder="Zaporka"><br><br>
+        <input type="password" name="zaporka" placeholder="Zaporka"><br><br>
         <form action="pocetnaStudent.html">
         <input type="submit" value="Prijava kao student">
         </form>

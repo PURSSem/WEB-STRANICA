@@ -35,9 +35,9 @@
         Registracija korisnika.
     </p>
 <form action="includes/registracija.inc.php" method="post">
-        <input type="text" id="korisnickoIme" name="korisnickoIme"
+        <input type="text" name="korisnickoIme"
         placeholder="Korisničko ime"><br>
-        <input type="text" id="brojSobe" name="brojSobe"
+        <input type="text" name="brojSobe"
         placeholder="Broj sobe"><br>
        <!-- <input type="text" id="rfid" name="rfid"
         placeholder="RFID"><br>--->
