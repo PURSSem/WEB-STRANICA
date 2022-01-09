@@ -46,6 +46,21 @@
         <!-- <form action="pocetnaStudent.html">-->
         <button type="submit" name="submit">Registriraj korisnika</button>
         </form>
-        <?php
+<?php
+if(isset($_GET["error"]))
+if($_GET["error"] == "emptyinput") {
+    echo "<p>Popunite sva polja</p>";
+}else if($_GET["error"] == "invalidname"){
+    echo "<p>Upišite ime bez znakova</p>";
+}else if($_GET["error"] == "invalidbrojsobe"){
+    echo "<p>Upišite postojeći broj sobe</p>";
+}else if($_GET["error"] == "zaporkesenepoklapaju"){
+    echo "<p>Zaporke se ne poklapaju</p>";
+}else if($_GET["error"] == "stmtfailed"){
+    echo "<p>Nešto nije uredu, pokušajte ponovno!</p>";
+}
+?>
+
+<?php
 include_once 'footer.php';
 ?>
