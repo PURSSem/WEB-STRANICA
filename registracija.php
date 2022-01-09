@@ -42,7 +42,7 @@
        <!-- <input type="text" id="rfid" name="rfid"
         placeholder="RFID"><br>--->
         <input type="password" name="zaporka" placeholder="Zaporka"><br><br>
-        <input type="password" name="zaporkaponovi" placeholder="Ponovi zaporku"><br><br>
+        <input type="password" name="ponovizaporka" placeholder="Ponovi zaporku"><br><br>
         <!-- <form action="pocetnaStudent.html">-->
         <button type="submit" name="submit">Registriraj korisnika</button>
         </form>
