@@ -47,7 +47,7 @@ function pwdMatch($zaporka, $ponovizaporka){
 function uidExists($conn, $name, $brojsobe){
     $sql = "SELECT * FROM users WHERE usersName = ? OR usersBrojSobe =?;";
     $stmt = mysqli_stmt_init($conn);
-    if(mysqli_stmt_prepare($stmt,$sql)){
+    if(!mysqli_stmt_prepare($stmt,$sql)){
         header("location: ../registracija.php?error=imevecpostoji");
         exit();
     }
@@ -84,4 +84,38 @@ function createUser($conn, $name, $brojsobe, $zaporka){
     mysqli_stmt_close($stmt);
     header("location: ../registracija.php?error=none");
     exit();
+}
+function emptyInputLogin($korisnickoIme, $zaporka){
+    $result;
+    if(empty($korisnickoIme)|| empty($zaporka)){
+        $result = true;
+    }
+    else{
+        $result = false;
+    }
+    return $result;
+    }
+
+function loginUser($conn, $korisnickoIme, $zaporka){
+    $uidExists = uidExists($conn, $korisnickoIme, $korisnickoIme);
+
+    if($uidExists == false){
+        header("location: ../prijava.php?error=wronglogin");
+        exit();
+    }
+
+    $zaporkaHashed = $uidExists["usersZaporka"];
+    $checkZaporka = password_verify($zaporka, $zaporkaHashed);
+
+    if($checkZaporka == false){
+        header("location: ../prijava.php?error=wronglogin");
+        exit();
+    }
+    else if($checkZaporka == true){
+        session_start();
+        $_SESSION["userid"] = $uidExists["usersId"];
+        $_SESSION["username"] = $uidExists["usersName"];
+        header("location: ../index.php?error=none");
+        exit();
+    }
 }
