@@ -1,3 +1,7 @@
+<?php
+include_once 'header.php';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,22 +29,32 @@
         <form action="kontakt.php">
         <input type="submit" value="Kontakt">
         </form>
-        <form action="prijava.php">
-        <input type="submit" value="Prijava">
-        </form>
-        <form action="registracija.php">
-        <input type="submit" value="Registracija">
-        </form>
+        <?php
+      if(isset($_SESSION["username"])){
+          echo "<li><a href='upravljanje.php'>Upravljanje</a></li>";
+          echo "<li><a href='includes/logout.inc.php'>Odjava</a></li>";
+      }
+      else{
+        echo "<li><a href='prijava.php'>Prijava</a></li>";
+        echo "<li><a href='registracija.php'>Registracija</a></li>";
+      }
+        ?>
     <p>
         Prijavite se podacima dobivenima od hotela.
     </p>
-
-        <input type="text" name="korisnickoIme"
-        placeholder="Korisničko ime"><br>
+    <form action="includes/login.inc.php" method="post">
+        <input type="text" name="korisnickoIme" placeholder="Korisničko ime"><br>
         <input type="password" name="zaporka" placeholder="Zaporka"><br><br>
-        <form action="pocetnaStudent.html">
-        <input type="submit" value="Prijava kao student">
-        </form>
+        <button type="submit" name="submit">Prijava</button>
+   </form>
+<?php
+ if(isset($_GET["error"]))
+     if($_GET["error"] == "emptyinput") {
+        echo "<p>Popunite sva polja</p>";
+        }else if($_GET["error"] == "wronglogin"){
+        echo "<p>Netočno ime/broj sobe ili zaporka</p>";
+        }
+?>
         <?php
 include_once 'footer.php';
 ?>
