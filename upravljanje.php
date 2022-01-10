@@ -29,7 +29,7 @@
     <div>
         <br>
         <br>
-        <form action="index.html">
+        <form action="index.php">
             <input type="submit" value="POČETNA">
         </form>
     </div>
