@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <head>
     <link rel="stylesheet" href="stylesindex.css">
     <meta charset="UTF-8">
