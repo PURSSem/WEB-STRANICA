@@ -115,6 +115,7 @@ function loginUser($conn, $korisnickoIme, $zaporka){
         session_start();
         $_SESSION["userid"] = $uidExists["usersId"];
         $_SESSION["username"] = $uidExists["usersName"];
+        $_SESSION["brSobe"] = $uidExists["usersBrojSobe"];
         header("location: ../index.php?error=none");
         exit();
     }

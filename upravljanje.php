@@ -26,54 +26,59 @@ $mqtt = new MqttClient($server, $port, $clientId);
 $mqtt->connect($connectionSettings, $clean_session);
 
 
+if($_SESSION["brSobe"] == "101"){
+    $brojSobeTopic = 'hotelpurs/soba101';
+}elseif($_SESSION["brSobe"] == "201"){
+    $brojSobeTopic = 'hotelpurs/soba201';
+}
 
 if (array_key_exists('wcON', $_POST)) {
 
-    $mqtt->publish('hotelpurs/soba101', 'wcon', 2, true);
+    $mqtt->publish($brojSobeTopic, 'wcon', 2, true);
 }
 else if (array_key_exists('wcOFF', $_POST)) {
 
-    $mqtt->publish('hotelpurs/soba101', 'wcoff', 2, true);
+    $mqtt->publish($brojSobeTopic, 'wcoff', 2, true);
 }
 if (array_key_exists('sobaON', $_POST)) {
 
-    $mqtt->publish('hotelpurs/soba101', 'sobaon', 2, true);
+    $mqtt->publish($brojSobeTopic, 'sobaon', 2, true);
 }
 
 else if (array_key_exists('sobaOFF', $_POST)) {
 
-    $mqtt->publish('hotelpurs/soba101', 'sobaoff', 2, true);
+    $mqtt->publish($brojSobeTopic, 'sobaoff', 2, true);
 }
 
 if (array_key_exists('vrata', $_POST)) {
 
-    $mqtt->publish('hotelpurs/soba101', 'open', 2, true);
+    $mqtt->publish($brojSobeTopic, 'open', 2, true);
   //  sleep(3);
   //  $mqtt->publish('soba101/vrata', 'null', 0, true);
 }
 if (array_key_exists('roleteUP', $_POST)) {
 
-    $mqtt->publish('hotelpurs/soba101', 'rolup', 2, true);
+    $mqtt->publish($brojSobeTopic, 'rolup', 2, true);
    // sleep(2);
    // $mqtt->publish('soba101/rolete', 'null', 0, true);
 }
 else if (array_key_exists('roleteDOWN', $_POST)) {
 
-    $mqtt->publish('hotelpurs/soba101', 'roldown', 2, true);
+    $mqtt->publish($brojSobeTopic, 'roldown', 2, true);
   //  sleep(2);
   //  $mqtt->publish('soba101/rolete', 'nulll', 0, true);
 }
 
 if (array_key_exists('tempUP', $_POST)) {
 
-    $mqtt->publish('hotelpurs/soba101', 'tempup', 2, true);
+    $mqtt->publish($brojSobeTopic, 'tempup', 2, true);
   //  sleep(2);
   //  $mqtt->publish('soba101/tempset', 'null', 0, true);
 }
 else if (array_key_exists('tempDOWN', $_POST)) {
 
 
-    $mqtt->publish('hotelpurs/soba101', 'tempdown', 2, true);
+    $mqtt->publish($brojSobeTopic, 'tempdown', 2, true);
   //  sleep(2);
    // $mqtt->publish('soba101/tempset', 'null', 0, true);
 }
