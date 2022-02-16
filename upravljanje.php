@@ -1,5 +1,6 @@
 <?php
-require('C:\Users\antep\vendor\autoload.php');
+session_start();
+require('/home/webserver/vendor/autoload.php');
 
 use \PhpMqtt\Client\MqttClient;
 use \PhpMqtt\Client\ConnectionSettings;
@@ -19,62 +20,65 @@ $connectionSettings
     ->setLastWillTopic('emqx/test/last-will')
     ->setLastWillMessage('client disconnect')
     ->setLastWillQualityOfService(1);
-//pcntl_async_signals(true);
 
 $mqtt = new MqttClient($server, $port, $clientId);
-//pcntl_signal(SIGINT, function (int $signal, $info) use ($mqtt) {
-  //  $mqtt->interrupt();
-//});
+
 $mqtt->connect($connectionSettings, $clean_session);
 
-$mqtt->subscribe('soba101/temptest', function ($topic, $message) {
-    printf("Received message on topic [%s]: %s\n", $topic, $message);
-
-    echo "<h2>" . $message . "</h2>";
-    echo "<h2>" . $topic . "</h2>";
-}, 0);
 
 
-if (array_key_exists('wc101ON', $_POST)) {
-    $payload = array(
-        'on'
-    );
-    $mqtt->publish(
-        // topic
-        'soba101/wc',
-        // payload
-        'on',
-        // qos
-        0,
-        // retain
-        true
-    );
+if (array_key_exists('wcON', $_POST)) {
+
+    $mqtt->publish('hotelpurs/soba101', 'wcon', 2, true);
+}
+else if (array_key_exists('wcOFF', $_POST)) {
+
+    $mqtt->publish('hotelpurs/soba101', 'wcoff', 2, true);
+}
+if (array_key_exists('sobaON', $_POST)) {
+
+    $mqtt->publish('hotelpurs/soba101', 'sobaon', 2, true);
 }
 
-if (array_key_exists('wc101OFF', $_POST)) {
-    $payload = array(
-        'off'
-    );
-    $mqtt->publish(
-        // topic
-        'soba101/wc',
-        // payload
-        'off',
-        // qos
-        0,
-        // retain
-        true
-    );
+else if (array_key_exists('sobaOFF', $_POST)) {
+
+    $mqtt->publish('hotelpurs/soba101', 'sobaoff', 2, true);
 }
 
-//sleep(1);
-//$mqtt->loop(true);
+if (array_key_exists('vrata', $_POST)) {
+
+    $mqtt->publish('hotelpurs/soba101', 'open', 2, true);
+  //  sleep(3);
+  //  $mqtt->publish('soba101/vrata', 'null', 0, true);
+}
+if (array_key_exists('roleteUP', $_POST)) {
+
+    $mqtt->publish('hotelpurs/soba101', 'rolup', 2, true);
+   // sleep(2);
+   // $mqtt->publish('soba101/rolete', 'null', 0, true);
+}
+else if (array_key_exists('roleteDOWN', $_POST)) {
+
+    $mqtt->publish('hotelpurs/soba101', 'roldown', 2, true);
+  //  sleep(2);
+  //  $mqtt->publish('soba101/rolete', 'nulll', 0, true);
+}
+
+if (array_key_exists('tempUP', $_POST)) {
+
+    $mqtt->publish('hotelpurs/soba101', 'tempup', 2, true);
+  //  sleep(2);
+  //  $mqtt->publish('soba101/tempset', 'null', 0, true);
+}
+else if (array_key_exists('tempDOWN', $_POST)) {
 
 
-
+    $mqtt->publish('hotelpurs/soba101', 'tempdown', 2, true);
+  //  sleep(2);
+   // $mqtt->publish('soba101/tempset', 'null', 0, true);
+}
 
 ?>
-
 
 
 <!DOCTYPE html>
@@ -92,33 +96,41 @@ if (array_key_exists('wc101OFF', $_POST)) {
     <center>
         <h1>Upravljanje hotelskom sobom</h1>
 
-        <form method="post">
+      
 
             <h3>rasvjeta kupaonica</h3>
-            <input type="submit" name="wc101ON" class="button" value="ON" />
-            <input type="submit" name="wc101OFF" class="button" value="OFF" />
-
+            <form method="post">
+            <input type="submit" name="wcON" class="button" value="ON" />
+            <input type="submit" name="wcOFF" class="button" value="OFF" />
+        </form>
             <h3>Rasvjeta soba</h3>
-            <input type="submit" name="soba101ON" class="button" value="ON" />
-            <input type="submit" name="soba101OFF" class="button" value="OFF" />
-
+            <form method="post">
+            <input type="submit" name="sobaON" class="button" value="ON" />
+            <input type="submit" name="sobaOFF" class="button" value="OFF" />
+            </form>
             <h3>Vrata</h3>
-            <input type="submit" name="vrata101" class="button" value="Otključaj" />
-
+            <form method="post">
+            <input type="submit" name="vrata" class="button" value="Otključaj" />
+            </form>
             <h3>Rolete</h3>
-            <input type="submit" name="roletegore" class="button" value="&#8593" />
-            <input type="submit" name="roletedolje" class="button" value="&#8595" />
-
+            <form method="post">
+            <input type="submit" name="roleteUP" class="button" value="&#8593" />
+            <input type="submit" name="roleteDOWN" class="button" value="&#8595" />
+            </form>
 
             <h3>Temperatura</h3>
+<form method="post">
+            <input type="submit" name="tempUP" class="button" value="+" />
+            <input type="submit" name="tempDOWN" class="button" value="-" />
+            </form>
 
-            <input type="submit" name="tempgore" class="button" value="&#8593" />
-            <input type="submit" name="tempdolje" class="button" value="&#8595" />
 
             <h3>Stanje temperature</h3>
+            <?php
 
+            echo $_SESSION['var'];
 
-
+            ?>
     </center>
     <div>
         <br>
