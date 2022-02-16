@@ -37,7 +37,6 @@ include_once 'header.php';
 
         $users= mysqli_fetch_all($results,MYSQLI_ASSOC);
 
-        print_r($users[0]);
         if(isset($_SESSION["username"])){
           if(($_SESSION["username"])=="admin"){
            echo "<li><a href='registracija.php'>Registracija</a></li>";
