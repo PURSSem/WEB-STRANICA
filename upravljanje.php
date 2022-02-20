@@ -1,6 +1,6 @@
 <?php
 session_start();
-require('/home/webserver/vendor/autoload.php');
+require('C:\Users\antep\vendor\autoload.php');
 
 use \PhpMqtt\Client\MqttClient;
 use \PhpMqtt\Client\ConnectionSettings;
@@ -30,17 +30,14 @@ $mqtt->connect($connectionSettings, $clean_session);
 if (array_key_exists('wcON', $_POST)) {
 
     $mqtt->publish('hotelpurs/soba101', 'wcon', 2, true);
-}
-else if (array_key_exists('wcOFF', $_POST)) {
+} else if (array_key_exists('wcOFF', $_POST)) {
 
     $mqtt->publish('hotelpurs/soba101', 'wcoff', 2, true);
 }
 if (array_key_exists('sobaON', $_POST)) {
 
     $mqtt->publish('hotelpurs/soba101', 'sobaon', 2, true);
-}
-
-else if (array_key_exists('sobaOFF', $_POST)) {
+} else if (array_key_exists('sobaOFF', $_POST)) {
 
     $mqtt->publish('hotelpurs/soba101', 'sobaoff', 2, true);
 }
@@ -48,34 +45,27 @@ else if (array_key_exists('sobaOFF', $_POST)) {
 if (array_key_exists('vrata', $_POST)) {
 
     $mqtt->publish('hotelpurs/soba101', 'open', 2, true);
-  //  sleep(3);
-  //  $mqtt->publish('soba101/vrata', 'null', 0, true);
+
 }
 if (array_key_exists('roleteUP', $_POST)) {
 
     $mqtt->publish('hotelpurs/soba101', 'rolup', 2, true);
-   // sleep(2);
-   // $mqtt->publish('soba101/rolete', 'null', 0, true);
-}
-else if (array_key_exists('roleteDOWN', $_POST)) {
+
+} else if (array_key_exists('roleteDOWN', $_POST)) {
 
     $mqtt->publish('hotelpurs/soba101', 'roldown', 2, true);
-  //  sleep(2);
-  //  $mqtt->publish('soba101/rolete', 'nulll', 0, true);
+    
 }
 
 if (array_key_exists('tempUP', $_POST)) {
 
     $mqtt->publish('hotelpurs/soba101', 'tempup', 2, true);
-  //  sleep(2);
-  //  $mqtt->publish('soba101/tempset', 'null', 0, true);
-}
-else if (array_key_exists('tempDOWN', $_POST)) {
+
+} else if (array_key_exists('tempDOWN', $_POST)) {
 
 
     $mqtt->publish('hotelpurs/soba101', 'tempdown', 2, true);
-  //  sleep(2);
-   // $mqtt->publish('soba101/tempset', 'null', 0, true);
+
 }
 
 ?>
@@ -96,47 +86,50 @@ else if (array_key_exists('tempDOWN', $_POST)) {
     <center>
         <h1>Upravljanje hotelskom sobom</h1>
 
-      
 
-            <h3>rasvjeta kupaonica</h3>
-            <form method="post">
+
+        <h3>rasvjeta kupaonica</h3>
+        <form method="post">
             <input type="submit" name="wcON" class="button" value="ON" />
             <input type="submit" name="wcOFF" class="button" value="OFF" />
         </form>
-            <h3>Rasvjeta soba</h3>
-            <form method="post">
+        <h3>Rasvjeta soba</h3>
+        <form method="post">
             <input type="submit" name="sobaON" class="button" value="ON" />
             <input type="submit" name="sobaOFF" class="button" value="OFF" />
-            </form>
-            <h3>Vrata</h3>
-            <form method="post">
+        </form>
+        <h3>Vrata</h3>
+        <form method="post">
             <input type="submit" name="vrata" class="button" value="Otključaj" />
-            </form>
-            <h3>Rolete</h3>
-            <form method="post">
+        </form>
+        <h3>Rolete</h3>
+        <form method="post">
             <input type="submit" name="roleteUP" class="button" value="&#8593" />
             <input type="submit" name="roleteDOWN" class="button" value="&#8595" />
-            </form>
+        </form>
 
-            <h3>Temperatura</h3>
-<form method="post">
+        <h3>Temperatura</h3>
+        <form method="post">
             <input type="submit" name="tempUP" class="button" value="+" />
             <input type="submit" name="tempDOWN" class="button" value="-" />
-            </form>
+        </form>
 
 
-            <h3>Stanje temperature</h3>
-            <?php
 
-            echo $_SESSION['var'];
-
-            ?>
     </center>
     <div>
         <br>
         <br>
         <form action="index.php">
             <input type="submit" value="POČETNA">
+        </form>
+    </div>
+
+    <div>
+        <br>
+        <br>
+        <form action="temperatura.php">
+            <input type="submit" value="Stanje temperature">
         </form>
     </div>
 </body>

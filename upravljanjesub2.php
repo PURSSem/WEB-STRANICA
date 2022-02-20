@@ -1,6 +1,6 @@
 <?php
 session_start();
-require('/home/webserver/vendor/autoload.php');
+require('C:\Users\antep\vendor\autoload.php');
 
 use \PhpMqtt\Client\MqttClient;
 use \PhpMqtt\Client\ConnectionSettings;
@@ -26,9 +26,10 @@ $mqtt = new MqttClient($server, $port, $clientId);
 $mqtt->connect($connectionSettings, $clean_session);
 printf("client connected\n");
 
-$mqtt->subscribe('soba101/temp', function ($topic, $message) {
+$mqtt->subscribe('soba101/temperatura', function ($topic, $message) {
     printf("Received message on topic [%s]: %s\n", $topic, $message);
-    $_SESSION['var']=$message;
+   
+    $_SESSION['variable']=$message;
 
 }, 0);
 
@@ -36,3 +37,4 @@ $mqtt->subscribe('soba101/temp', function ($topic, $message) {
 
 $mqtt->loop(true);
 ?>
+ž
